@@ -1,0 +1,312 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Seq2SeqSharp/1.0.0": {
+        "dependencies": {
+          "ManagedCuda-11": "11.4.47",
+          "Microsoft.CSharp": "4.7.0",
+          "Microsoft.Extensions.Caching.Memory": "6.0.0",
+          "System.Data.DataSetExtensions": "4.5.0",
+          "TensorSharp": "1.0.0",
+          "TensorSharp.CUDA": "1.0.0",
+          "protobuf-net": "3.0.101",
+          "AdvUtils": "1.0.0.0"
+        },
+        "runtime": {
+          "Seq2SeqSharp.dll": {}
+        }
+      },
+      "ManagedCuda-11/11.4.47": {
+        "runtime": {
+          "lib/netcoreapp3.1/ManagedCuda.netCore.dll": {
+            "assemblyVersion": "11.4.47.0",
+            "fileVersion": "11.4.47.0"
+          }
+        }
+      },
+      "ManagedCuda-CUBLAS/11.4.47": {
+        "runtime": {
+          "lib/netcoreapp3.1/CudaBlas.netCore.dll": {
+            "assemblyVersion": "11.4.47.0",
+            "fileVersion": "11.4.47.0"
+          }
+        }
+      },
+      "ManagedCuda-CURAND/11.4.47": {
+        "runtime": {
+          "lib/netcoreapp3.1/CudaRand.netCore.dll": {
+            "assemblyVersion": "11.4.47.0",
+            "fileVersion": "11.4.47.0"
+          }
+        }
+      },
+      "ManagedCuda-NVRTC/11.4.47": {
+        "runtime": {
+          "lib/netcoreapp3.1/NVRTC.netCore.dll": {
+            "assemblyVersion": "11.4.47.0",
+            "fileVersion": "11.4.47.0"
+          }
+        }
+      },
+      "Microsoft.CSharp/4.7.0": {},
+      "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "6.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "Microsoft.Extensions.Caching.Memory/6.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Abstractions": "6.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Options": "6.0.0",
+          "Microsoft.Extensions.Primitives": "6.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options/6.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Primitives": "6.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Extensions.Options.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "Microsoft.Extensions.Primitives/6.0.0": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "protobuf-net/3.0.101": {
+        "dependencies": {
+          "protobuf-net.Core": "3.0.101"
+        },
+        "runtime": {
+          "lib/net5.0/protobuf-net.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.101.59408"
+          }
+        }
+      },
+      "protobuf-net.Core/3.0.101": {
+        "runtime": {
+          "lib/net5.0/protobuf-net.Core.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.101.59408"
+          }
+        }
+      },
+      "System.Data.DataSetExtensions/4.5.0": {},
+      "System.Numerics.Vectors/4.5.0": {},
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
+      "TensorSharp/1.0.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Data.DataSetExtensions": "4.5.0",
+          "System.Numerics.Vectors": "4.5.0"
+        },
+        "runtime": {
+          "TensorSharp.dll": {}
+        }
+      },
+      "TensorSharp.CUDA/1.0.0": {
+        "dependencies": {
+          "ManagedCuda-11": "11.4.47",
+          "ManagedCuda-CUBLAS": "11.4.47",
+          "ManagedCuda-CURAND": "11.4.47",
+          "ManagedCuda-NVRTC": "11.4.47",
+          "Microsoft.CSharp": "4.7.0",
+          "System.Data.DataSetExtensions": "4.5.0",
+          "TensorSharp": "1.0.0"
+        },
+        "runtime": {
+          "TensorSharp.CUDA.dll": {}
+        }
+      },
+      "AdvUtils/1.0.0.0": {
+        "runtime": {
+          "AdvUtils.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Seq2SeqSharp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ManagedCuda-11/11.4.47": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SNAuL4XJbHfE15OXcq7T8o83tklhXE8fv5Po+o0X8om5yQGoz0n+uZd6eK+YgI73oJeSXDPRrMyc98gcNGtnpA==",
+      "path": "managedcuda-11/11.4.47",
+      "hashPath": "managedcuda-11.11.4.47.nupkg.sha512"
+    },
+    "ManagedCuda-CUBLAS/11.4.47": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Wec3eKVea2bcIxTXitzhg5eZHGaL46QEaz+5as41zX0nSB5+TyXE6IHohfsmhzJfAIQ0qy4F69+WqzbAbWsFcg==",
+      "path": "managedcuda-cublas/11.4.47",
+      "hashPath": "managedcuda-cublas.11.4.47.nupkg.sha512"
+    },
+    "ManagedCuda-CURAND/11.4.47": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QQvntiG0ncI+7youmTvZkorAm7mQ029E9PoixZgTsxwbuTvmGv6RkMFrIAHTdRpX9J87N80piKF4/lCl9SAV4Q==",
+      "path": "managedcuda-curand/11.4.47",
+      "hashPath": "managedcuda-curand.11.4.47.nupkg.sha512"
+    },
+    "ManagedCuda-NVRTC/11.4.47": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CCUgT1qsPfS4Fbauij21EuIX/AVYzm/SAMI4c8oF2aHW8/lmXRVWHdur9G2E4kTqZLgktt665UvosTocbbTOSw==",
+      "path": "managedcuda-nvrtc/11.4.47",
+      "hashPath": "managedcuda-nvrtc.11.4.47.nupkg.sha512"
+    },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bcz5sSFJbganH0+YrfvIjJDIcKNW7TL07C4d1eTmXy/wOt52iz4LVogJb6pazs7W0+74j0YpXFErvp++Aq5Bsw==",
+      "path": "microsoft.extensions.caching.abstractions/6.0.0",
+      "hashPath": "microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Caching.Memory/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ve3BlCzhAlVp5IgO3+8dacAhZk1A0GlIlFNkAcfR2TfAibLKWIt5DhVJZfu4YtW+XZ89OjYf/agMcgjDtPxdGA==",
+      "path": "microsoft.extensions.caching.memory/6.0.0",
+      "hashPath": "microsoft.extensions.caching.memory.6.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xlzi2IYREJH3/m6+lUrQlujzX8wDitm4QGnUu6kUXTQAWPuZY8i+ticFJbzfqaetLA6KR/rO6Ew/HuYD+bxifg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/6.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/HggWBbTwy8TgebGSX5DBZ24ndhzi93sHUBDvP1IxbZD7FDokYzdAr6+vbWGjw2XAfR2EJ1sfKUotpjHnFWPxA==",
+      "path": "microsoft.extensions.logging.abstractions/6.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dzXN0+V1AyjOe2xcJ86Qbo233KHuLEY0njf/P2Kw8SfJU+d45HNS2ctJdnEnrWbM9Ye2eFgaC5Mj9otRMU6IsQ==",
+      "path": "microsoft.extensions.options/6.0.0",
+      "hashPath": "microsoft.extensions.options.6.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Primitives/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9+PnzmQFfEFNR9J2aDTfJGGupShHjOuGw4VUv+JB044biSHrnmCIMD+mJHmb2H7YryrfBEXDurxQ47gJZdCKNQ==",
+      "path": "microsoft.extensions.primitives/6.0.0",
+      "hashPath": "microsoft.extensions.primitives.6.0.0.nupkg.sha512"
+    },
+    "protobuf-net/3.0.101": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mLm8VGfGylp9q+rbJDp3uw0BOeNzfGENecVz/EYGlzq3ss7tfajGXHCMoZm/GxJ9vSn9pcK22UXWZnQ5GJQMjA==",
+      "path": "protobuf-net/3.0.101",
+      "hashPath": "protobuf-net.3.0.101.nupkg.sha512"
+    },
+    "protobuf-net.Core/3.0.101": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gf9QIF0RlctfjmOjbE6eOyMulkNEsH7tHncjKj/4BTu9tkuTyrH3fv5I+35GnolJqKJ6fh9kYaezvNRL3t75+Q==",
+      "path": "protobuf-net.core/3.0.101",
+      "hashPath": "protobuf-net.core.3.0.101.nupkg.sha512"
+    },
+    "System.Data.DataSetExtensions/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-221clPs1445HkTBZPL+K9sDBdJRB8UN8rgjO3ztB0CQ26z//fmJXtlsr6whGatscsKGBrhJl5bwJuKSA8mwFOw==",
+      "path": "system.data.datasetextensions/4.5.0",
+      "hashPath": "system.data.datasetextensions.4.5.0.nupkg.sha512"
+    },
+    "System.Numerics.Vectors/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QQTlPTl06J/iiDbJCiepZ4H//BVraReU4O4EoRw1U02H5TLUIT7xn3GnDp9AXPSlJUDyFs4uWjWafNX6WrAojQ==",
+      "path": "system.numerics.vectors/4.5.0",
+      "hashPath": "system.numerics.vectors.4.5.0.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    },
+    "TensorSharp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TensorSharp.CUDA/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AdvUtils/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

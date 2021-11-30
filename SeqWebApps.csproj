@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AdvUtils">
+      <HintPath>dll\Seq2SeqSharp\AdvUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="Seq2SeqSharp">
+      <HintPath>dll\Seq2SeqSharp\Seq2SeqSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
