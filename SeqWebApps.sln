@@ -5,6 +5,14 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeqWebApps", "SeqWebApps.csproj", "{1B2CC671-DF2B-4115-929B-218234AEED0F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seq2SeqSharp", "..\..\Seq2SeqSharp\Seq2SeqSharp\Seq2SeqSharp.csproj", "{F9A08057-8306-454A-815F-78A8533A6B20}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TensorSharp", "..\..\Seq2SeqSharp\TensorSharp\TensorSharp.csproj", "{5E45CBFF-F895-4903-81BE-96D242B8545C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TensorSharp.CUDA", "..\..\Seq2SeqSharp\TensorSharp.CUDA\TensorSharp.CUDA.csproj", "{856EA7F9-9E67-4FC7-AC36-D1390F8F4155}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvUtils", "..\..\Seq2SeqSharp\AdvUtils\AdvUtils.csproj", "{24308639-2394-484B-AF00-8893FC4EF0F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{1B2CC671-DF2B-4115-929B-218234AEED0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B2CC671-DF2B-4115-929B-218234AEED0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B2CC671-DF2B-4115-929B-218234AEED0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A08057-8306-454A-815F-78A8533A6B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A08057-8306-454A-815F-78A8533A6B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A08057-8306-454A-815F-78A8533A6B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A08057-8306-454A-815F-78A8533A6B20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E45CBFF-F895-4903-81BE-96D242B8545C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E45CBFF-F895-4903-81BE-96D242B8545C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E45CBFF-F895-4903-81BE-96D242B8545C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E45CBFF-F895-4903-81BE-96D242B8545C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{856EA7F9-9E67-4FC7-AC36-D1390F8F4155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856EA7F9-9E67-4FC7-AC36-D1390F8F4155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856EA7F9-9E67-4FC7-AC36-D1390F8F4155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{856EA7F9-9E67-4FC7-AC36-D1390F8F4155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24308639-2394-484B-AF00-8893FC4EF0F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24308639-2394-484B-AF00-8893FC4EF0F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24308639-2394-484B-AF00-8893FC4EF0F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24308639-2394-484B-AF00-8893FC4EF0F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,25 +6,30 @@ using Seq2SeqSharp;
 using Seq2SeqSharp.Tools;
 using Seq2SeqSharp.Corpus;
 using Seq2SeqSharp._SentencePiece;
+using Seq2SeqSharp.Applications;
 
 namespace Seq2SeqWebApps
 {
     public static class Seq2SeqInstance
     {
-        static private object locker = new object();
         static private Seq2Seq m_seq2seq;
         static private SentencePiece m_srcSpm;
         static private SentencePiece m_tgtSpm;
+        static private Seq2SeqOptions opts;
 
-        static public void Initialization(string modelFilePath, int maxTestSrcSentLength, int maxTestTgtSentLength, string processorType, string deviceIds, SentencePiece srcSpm, SentencePiece tgtSpm, string decodingStrategy = "Sampling")
+        static public void Initialization(string modelFilePath, int maxTestSrcSentLength, int maxTestTgtSentLength, string deviceIds, SentencePiece srcSpm, SentencePiece tgtSpm,
+            Seq2SeqSharp.Utils.DecodingStrategyEnums decodingStrategyEnum, float topPSampling, float distancePenalty, float repeatPenalty)
         {
-            Seq2SeqOptions opts = new Seq2SeqOptions();
+            opts = new Seq2SeqOptions();
             opts.ModelFilePath = modelFilePath;
             opts.MaxTestSrcSentLength = maxTestSrcSentLength;
             opts.MaxTestTgtSentLength = maxTestTgtSentLength;
-            opts.ProcessorType = processorType;
+            opts.ProcessorType = ProcessorTypeEnums.CPU;
             opts.DeviceIds = deviceIds;
-            opts.DecodingStrategy = decodingStrategy;
+            opts.DecodingStrategy = decodingStrategyEnum;
+            opts.DecodingDistancePenalty = distancePenalty;
+            opts.DecodingRepeatPenalty = repeatPenalty;
+            opts.DecodingTopPValue = topPSampling;
 
             m_srcSpm = srcSpm;
             m_tgtSpm = tgtSpm;
@@ -32,28 +37,40 @@ namespace Seq2SeqWebApps
             m_seq2seq = new Seq2Seq(opts);
         }
 
-        static public string Call(string input, int tokenNumToGenerate)
+        static public string Call(string input, int tokenNumToGenerate, bool random, float distancePenalty, float repeatPenalty)
         {
-            lock (locker)
-            {
+            input = m_srcSpm.Encode(input);
+            List<string> tokens = input.Split(' ').ToList();
+            tokenNumToGenerate += tokens.Count;
 
-                input = m_srcSpm.Encode(input);
-                List<string> tokens = input.Split(' ').ToList();
-                tokenNumToGenerate += tokens.Count;
+            List<List<String>> batchTokens = new List<List<string>>();
+            batchTokens.Add(tokens);
 
-                List<List<String>> batchTokens = new List<List<string>>();
-                batchTokens.Add(tokens);
+            List<List<List<string>>> groupBatchTokens = new List<List<List<string>>>();
+            groupBatchTokens.Add(batchTokens);
 
-                List<List<List<string>>> groupBatchTokens = new List<List<List<string>>>();
-                groupBatchTokens.Add(batchTokens);
 
-                m_seq2seq.SetMaxOutputTokenNum(tokenNumToGenerate);
-                var nrs = m_seq2seq.Test<Seq2SeqCorpusBatch>(groupBatchTokens);
-                string rst = String.Join(" ", nrs[0].Output[0][0].ToArray(), 1, nrs[0].Output[0][0].Count - 2);
-                rst = m_tgtSpm.Decode(rst);
 
-                return rst;
-            }
+            List<string> tokens2 = input.Split(' ').ToList();
+
+            List<List<String>> batchTokens2 = new List<List<string>>();
+            batchTokens2.Add(tokens2);
+
+            List<List<List<string>>> groupBatchTokens2 = new List<List<List<string>>>();
+            groupBatchTokens2.Add(batchTokens2);
+
+
+            DecodingOptions decodingOptions = opts.CreateDecodingOptions();
+            decodingOptions.MaxTgtSentLength = tokenNumToGenerate;
+            decodingOptions.TopPValue = random ? 0.9f : 0.0f;
+            decodingOptions.DistancePenalty = distancePenalty;
+            decodingOptions.RepeatPenalty = repeatPenalty;
+
+            var nrs = m_seq2seq.Test<Seq2SeqCorpusBatch>(groupBatchTokens, groupBatchTokens2, decodingOptions);
+            string rst = String.Join(" ", nrs[0].Output[0][0].ToArray(), 1, nrs[0].Output[0][0].Count - 2);
+            rst = m_tgtSpm.Decode(rst);
+
+            return rst;
         }
     }
 }

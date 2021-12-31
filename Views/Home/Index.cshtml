@@ -8,11 +8,17 @@
     .loading {
         display: none;
     }
+    .changeIt {
+        display: none;
+    }
 </style>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+
+    <div class="loading"><link rel="icon" href="https://github.com/zhongkaifu/SeqWebApps/blob/main/wwwroot/loading.gif?raw=true" type="image/icon type"></div>
+
 </head>
 <body>
 
@@ -26,24 +32,46 @@
         <option value="50">50</option>
         <option value="100" selected="selected">100</option>
         <option value="200">200</option>
+        <option value="500">500</option>
     </select>
+
+    <label id="promptDistancePenalty">Penalty for distance:</label>
+    <select id="ddlDistancePenalty">
+        <option value="1">1</option>
+        <option value="2" selected="selected">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+
+    <label id="promptRepeatPenalty">Penalty for repeat:</label>
+    <select id="ddlRepeatPenalty">
+        <option value="1">1</option>
+        <option value="2" selected="selected">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+
     <input type="button" id="btnGet" value="Generate Text" />
     <br />
-    <div class="loading"><img src="https://github.com/zhongkaifu/Seq2SeqSharp/blob/master/SeqWebApps/wwwroot/loading.gif?raw=true"></div>
+    <div class="loading"><img src="https://github.com/zhongkaifu/SeqWebApps/blob/main/wwwroot/loading.gif?raw=true"></div>
     <label id="promptOutput">Output Text:</label>
     <br />
     <label id="outputText"></label>
+    
+    <div class="changeIt">
+    <input type="button" id="btnNextBatch" value="Change it" />
+    </div>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
         $(function () {
             $("#btnGet").click(function () {
-                var data = {};
-                data.Name = "Mudassar";
                 $.ajax({
                     type: "POST",
                     url: "/Home/GenerateText",
-                    data: { "input": $("#txtName").val(), "num": $("#ddlOutputTokenNum").val() },
+                    data: { "input": $("#txtName").val(), "num": $("#ddlOutputTokenNum").val(), "random": false, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val() },
                     beforeSend: function () {
                         $("#outputText").html("");
                         $(".loading").show();
@@ -51,6 +79,30 @@
                     success: function (response) {
                         $(".loading").hide();
                         $("#outputText").html(response.Output);
+                        $(".changeIt").show();
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+
+            $("#btnNextBatch").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/GenerateText",
+                    data: { "input": $("#txtName").val(), "num": $("#ddlOutputTokenNum").val(), "random": true, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val() },
+                    beforeSend: function () {
+                        $("#outputText").html("");
+                        $(".loading").show();
+                    },
+                    success: function (response) {
+                        $(".loading").hide();
+                        $("#outputText").html(response.Output);
+                        $(".changeIt").show();
                     },
                     failure: function (response) {
                         alert(response.responseText);

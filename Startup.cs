@@ -31,12 +31,18 @@ namespace SeqWebApps
                 var processorType = Configuration["Seq2Seq:ProcessorType"];
                 var deviceIds = Configuration["Seq2Seq:DeviceIds"];
                 var tokenGenerationStrategy = Configuration["Seq2Seq:TokenGenerationStrategy"];
+                var distancePenalty = float.Parse(Configuration["Seq2Seq:DistancePenalty"]);
+                var repeatPenalty = float.Parse(Configuration["Seq2Seq:RepeatPenalty"]);
+                var topPSampling = float.Parse(Configuration["Seq2Seq:TopPSampling"]);
 
 
                 SentencePiece srcSpm = new SentencePiece(Configuration["SourceSpm:ModelFilePath"]);
                 SentencePiece tgtSpm = new SentencePiece(Configuration["TargetSpm:ModelFilePath"]);
 
-                Seq2SeqInstance.Initialization(modelFilePath, maxTestSrcSentLength, maxTestTgtSentLength, processorType, deviceIds, srcSpm, tgtSpm, tokenGenerationStrategy);
+
+                Seq2SeqSharp.Utils.DecodingStrategyEnums decodingStrategyEnum = (Seq2SeqSharp.Utils.DecodingStrategyEnums)Enum.Parse(typeof(Seq2SeqSharp.Utils.DecodingStrategyEnums), tokenGenerationStrategy);
+
+                Seq2SeqInstance.Initialization(modelFilePath, maxTestSrcSentLength, maxTestTgtSentLength, deviceIds, srcSpm, tgtSpm, decodingStrategyEnum, topPSampling, distancePenalty, repeatPenalty);
             }
         }
 

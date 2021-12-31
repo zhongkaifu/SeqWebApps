@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,12 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="AdvUtils">
-      <HintPath>dll\Seq2SeqSharp\AdvUtils.dll</HintPath>
-    </Reference>
-    <Reference Include="Seq2SeqSharp">
-      <HintPath>dll\Seq2SeqSharp\Seq2SeqSharp.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\Seq2SeqSharp\AdvUtils\AdvUtils.csproj" />
+    <ProjectReference Include="..\..\Seq2SeqSharp\Seq2SeqSharp\Seq2SeqSharp.csproj" />
+    <ProjectReference Include="..\..\Seq2SeqSharp\TensorSharp.CUDA\TensorSharp.CUDA.csproj" />
+    <ProjectReference Include="..\..\Seq2SeqSharp\TensorSharp\TensorSharp.csproj" />
   </ItemGroup>
 
 </Project>
