@@ -27,12 +27,12 @@
     <br />
     <textarea type="text" id="txtName" cols="100" rows="20"></textarea>
     <br />
-    <label id="promptOutputTokenNum">The number of tokens to output:</label>
+    <label id="promptOutputTokenNum">The number of tokens to output in each step:</label>
     <select id="ddlOutputTokenNum">
-        <option value="50">50</option>
-        <option value="100" selected="selected">100</option>
-        <option value="200">200</option>
-        <option value="500">500</option>
+        <option value="2">2</option>
+        <option value="3" selected="selected">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
     </select>
 
     <label id="promptDistancePenalty">Penalty for distance:</label>
@@ -54,8 +54,10 @@
     </select>
 
     <input type="button" id="btnGet" value="Generate Text" />
+    <input type="button" id="btnCancel" value="Cancel" />
+
     <br />
-    <div class="loading"><img src="https://github.com/zhongkaifu/SeqWebApps/blob/main/wwwroot/loading.gif?raw=true"></div>
+    <div class="loading"><label id="statusText"></label></div>
     <label id="promptOutput">Output Text:</label>
     <br />
     <label id="outputText"></label>
@@ -71,15 +73,17 @@
                 $.ajax({
                     type: "POST",
                     url: "/Home/GenerateText",
-                    data: { "input": $("#txtName").val(), "num": $("#ddlOutputTokenNum").val(), "random": false, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val() },
+                    data: { "srcInput": $("#txtName").val(), "tgtInput": $("#txtName").val(), "num": $("#ddlOutputTokenNum").val(), "random": false, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val() },
                     beforeSend: function () {
                         $("#outputText").html("");
-                        $(".loading").show();
+                        $("#statusText").html("Generating...");
                     },
                     success: function (response) {
-                        $(".loading").hide();
                         $("#outputText").html(response.Output);
-                        $(".changeIt").show();
+
+                        $("#outputText").load();
+                        $("#btnNextBatch").trigger("click");
+
                     },
                     failure: function (response) {
                         alert(response.responseText);
@@ -94,15 +98,21 @@
                 $.ajax({
                     type: "POST",
                     url: "/Home/GenerateText",
-                    data: { "input": $("#txtName").val(), "num": $("#ddlOutputTokenNum").val(), "random": true, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val() },
+                    data: { "srcInput": $("#txtName").val(), "tgtInput": $("#outputText").text(), "num": $("#ddlOutputTokenNum").val(), "random": false, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val() },
                     beforeSend: function () {
-                        $("#outputText").html("");
-                        $(".loading").show();
                     },
                     success: function (response) {
-                        $(".loading").hide();
                         $("#outputText").html(response.Output);
-                        $(".changeIt").show();
+                        $("#outputText").load();
+
+                        if ($("#outputText").text().length < 1000 && $("#statusText").text() == "Generating...")
+                        {
+                           $("#btnNextBatch").trigger("click");
+                        }
+                        else
+                        {
+                            $("#statusText").html("Cancelled");
+                        }
                     },
                     failure: function (response) {
                         alert(response.responseText);
@@ -111,6 +121,11 @@
                         alert(response.responseText);
                     }
                 });
+
+
+            $("#btnCancel").click(function () {
+                $("#statusText").html("Cancelled");
+            });
             });
         });
     </script>

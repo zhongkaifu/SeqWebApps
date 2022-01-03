@@ -37,27 +37,27 @@ namespace Seq2SeqWebApps
             m_seq2seq = new Seq2Seq(opts);
         }
 
-        static public string Call(string input, int tokenNumToGenerate, bool random, float distancePenalty, float repeatPenalty)
+        static public string Call(string srcInput, string tgtInput, int tokenNumToGenerate, bool random, float distancePenalty, float repeatPenalty)
         {
-            input = m_srcSpm.Encode(input);
-            List<string> tokens = input.Split(' ').ToList();
-            tokenNumToGenerate += tokens.Count;
-
+            srcInput = m_srcSpm.Encode(srcInput);
+            List<string> tokens = srcInput.Split(' ').ToList();
+            
             List<List<String>> batchTokens = new List<List<string>>();
             batchTokens.Add(tokens);
 
-            List<List<List<string>>> groupBatchTokens = new List<List<List<string>>>();
-            groupBatchTokens.Add(batchTokens);
+            List<List<List<string>>> srcGroupBatchTokens = new List<List<List<string>>>();
+            srcGroupBatchTokens.Add(batchTokens);
 
 
-
-            List<string> tokens2 = input.Split(' ').ToList();
+            tgtInput = m_tgtSpm.Encode(tgtInput);
+            List<string> tokens2 = tgtInput.Split(' ').ToList();
+            tokenNumToGenerate += tokens2.Count;
 
             List<List<String>> batchTokens2 = new List<List<string>>();
             batchTokens2.Add(tokens2);
 
-            List<List<List<string>>> groupBatchTokens2 = new List<List<List<string>>>();
-            groupBatchTokens2.Add(batchTokens2);
+            List<List<List<string>>> tgtGroupBatchTokens = new List<List<List<string>>>();
+            tgtGroupBatchTokens.Add(batchTokens2);
 
 
             DecodingOptions decodingOptions = opts.CreateDecodingOptions();
@@ -66,8 +66,8 @@ namespace Seq2SeqWebApps
             decodingOptions.DistancePenalty = distancePenalty;
             decodingOptions.RepeatPenalty = repeatPenalty;
 
-            var nrs = m_seq2seq.Test<Seq2SeqCorpusBatch>(groupBatchTokens, groupBatchTokens2, decodingOptions);
-            string rst = String.Join(" ", nrs[0].Output[0][0].ToArray(), 1, nrs[0].Output[0][0].Count - 2);
+            var nrs = m_seq2seq.Test<Seq2SeqCorpusBatch>(srcGroupBatchTokens, tgtGroupBatchTokens, decodingOptions);
+            string rst = String.Join(" ", nrs[0].Output[0][0].ToArray(), 0, nrs[0].Output[0][0].Count);
             rst = m_tgtSpm.Decode(rst);
 
             return rst;

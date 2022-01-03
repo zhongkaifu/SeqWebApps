@@ -18,12 +18,12 @@ namespace SeqWebApps
         }
 
         [HttpPost]
-        public JsonResult GenerateText(string input, int num, bool random, float distancePenalty, float repeatPenalty)
+        public JsonResult GenerateText(string srcInput, string tgtInput, int num, bool random, float distancePenalty, float repeatPenalty)
         {
-            Logger.WriteLine($"Receive request string '{input}'");
+            Logger.WriteLine($"Receive request source string '{srcInput}' and target string '{tgtInput}'");
             TextGenerationModel textGeneration = new TextGenerationModel
             {
-                Output = CallBackend(input, num, random, distancePenalty, repeatPenalty),
+                Output = CallBackend(srcInput, tgtInput, num, random, distancePenalty, repeatPenalty),
                 DateTime = DateTime.Now.ToString()
             };
 
@@ -31,28 +31,33 @@ namespace SeqWebApps
         }
 
 
-        private string CallBackend(string InputText, int tokenNumToGenerate, bool random, float distancePenalty, float repeatPenalty)
+        private string CallBackend(string srcInputText, string tgtInputText, int tokenNumToGenerate, bool random, float distancePenalty, float repeatPenalty)
         {
-            string[] lines = InputText.Split("\n");
+            string[] srcLines = srcInputText.Split("\n");
+            string[] tgtLines = tgtInputText.Split("\n");
+
             List<string> outputLines = new List<string>();
 
-            foreach (var line in lines)
+            for (int i = 0; i < srcLines.Length;i++)        
             {
+                string srcLine = srcLines[i].ToLower();
+                string tgtLine = tgtLines[i].ToLower();
+
                 Stopwatch stopwatch = Stopwatch.StartNew();
 
-                string ll = line.ToLower().Trim();
-                if (ll.EndsWith("。") == false && ll.EndsWith("？") == false && ll.EndsWith("！") == false)
-                {
-                    ll = ll + "。";
-                }
+                //if (ll.EndsWith("。") == false && ll.EndsWith("？") == false && ll.EndsWith("！") == false)
+                //{
+                //    ll = ll + "。";
+                //}
 
-                string outputText = Seq2SeqInstance.Call(ll, tokenNumToGenerate, random, distancePenalty, repeatPenalty);
+
+                string outputText = Seq2SeqInstance.Call(srcLine, tgtLine, tokenNumToGenerate, random, distancePenalty, repeatPenalty);
 
                 outputLines.Add(outputText);
 
                 stopwatch.Stop();
 
-                Logger.WriteLine($"'{line}' --> '{outputText}', took: {stopwatch.Elapsed}");
+                Logger.WriteLine($"'{srcLine}' and '{tgtLine}' --> '{outputText}', took: {stopwatch.Elapsed}");
             }
 
             return String.Join("<br />", outputLines);
