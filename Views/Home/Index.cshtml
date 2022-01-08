@@ -30,9 +30,15 @@
     <label id="promptOutputTokenNum">The number of tokens to output in each step:</label>
     <select id="ddlOutputTokenNum">
         <option value="2">2</option>
-        <option value="3" selected="selected">3</option>
+        <option value="3">3</option>
         <option value="4">4</option>
-        <option value="5">5</option>
+        <option value="5" selected="selected">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
     </select>
 
     <label id="promptDistancePenalty">Penalty for distance:</label>
@@ -42,16 +48,37 @@
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
     </select>
 
     <label id="promptRepeatPenalty">Penalty for repeat:</label>
     <select id="ddlRepeatPenalty">
         <option value="1">1</option>
-        <option value="2" selected="selected">2</option>
+        <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10"  selected="selected">10</option>
     </select>
+
+
+    <label id="promptContextSize">Context size:</label>
+    <select id="ddlContextSize">
+        <option value="128"  selected="selected">128</option>
+        <option value="256">256</option>
+        <option value="384">384</option>
+        <option value="512">512</option>
+    </select>
+
 
     <input type="button" id="btnGet" value="Generate Text" />
     <input type="button" id="btnCancel" value="Cancel" />
@@ -70,13 +97,21 @@
     <script type="text/javascript">
         $(function () {
             $("#btnGet").click(function () {
+
+                $("#btnGet").attr("disabled", true);
+
                 $.ajax({
                     type: "POST",
                     url: "/Home/GenerateText",
-                    data: { "srcInput": $("#txtName").val(), "tgtInput": $("#txtName").val(), "num": $("#ddlOutputTokenNum").val(), "random": false, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val() },
+                    data: { "srcInput": $("#txtName").val(), "tgtInput": $("#txtName").val(), "num": $("#ddlOutputTokenNum").val(), 
+                    "random": false, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val(), 
+                    "contextSize": $("#ddlContextSize").val() },
                     beforeSend: function () {
+
                         $("#outputText").html("");
                         $("#statusText").html("Generating...");
+
+                      
                     },
                     success: function (response) {
                         $("#outputText").html(response.Output);
@@ -98,21 +133,31 @@
                 $.ajax({
                     type: "POST",
                     url: "/Home/GenerateText",
-                    data: { "srcInput": $("#txtName").val(), "tgtInput": $("#outputText").text(), "num": $("#ddlOutputTokenNum").val(), "random": false, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val() },
+                    data: { "srcInput": $("#txtName").val(), "tgtInput": $("#outputText").text(), "num": $("#ddlOutputTokenNum").val(), 
+                    "random": false, "distancePenalty": $("#ddlDistancePenalty").val(), "repeatPenalty": $("#ddlRepeatPenalty").val(), 
+                    "contextSize": $("#ddlContextSize").val() },
                     beforeSend: function () {
                     },
                     success: function (response) {
-                        $("#outputText").html(response.Output);
-                        $("#outputText").load();
 
-                        if ($("#outputText").text().length < 1000 && $("#statusText").text() == "Generating...")
-                        {
-                           $("#btnNextBatch").trigger("click");
-                        }
-                        else
+                        if (response.Output == $("#outputText").text())
                         {
                             $("#statusText").html("Cancelled");
                         }
+                        else
+                        {
+                            $("#outputText").html(response.Output);
+                            $("#outputText").load();
+
+                            if ($("#statusText").text() == "Generating...")
+                            {
+                               $("#btnNextBatch").trigger("click");
+                            }
+                            else
+                            {
+                                $("#statusText").html("Cancelled");
+                            }
+                         }
                     },
                     failure: function (response) {
                         alert(response.responseText);
@@ -125,6 +170,8 @@
 
             $("#btnCancel").click(function () {
                 $("#statusText").html("Cancelled");
+
+                $("#btnGet").attr("disabled", false);
             });
             });
         });

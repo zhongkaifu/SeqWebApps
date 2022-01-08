@@ -62,7 +62,7 @@ namespace Seq2SeqWebApps
 
             DecodingOptions decodingOptions = opts.CreateDecodingOptions();
             decodingOptions.MaxTgtSentLength = tokenNumToGenerate;
-            decodingOptions.TopPValue = random ? 0.9f : 0.0f;
+            decodingOptions.TopPValue = random ? 0.5f : 0.0f;
             decodingOptions.DistancePenalty = distancePenalty;
             decodingOptions.RepeatPenalty = repeatPenalty;
 
